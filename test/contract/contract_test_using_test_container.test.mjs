@@ -4,9 +4,11 @@ import { startAppServer, stopAppServer } from "./util/app.server";
 import { Wait } from "testcontainers";
 
 const APP_PORT = 8081;
-const describeOrSkipInCI = process.env.CI ? describe.skip : describe;
+const isLinux = process.platform === "linux";
+const isCI = process.env.CI === "true" || process.env.CI === "1";
+const describeOrSkipInNonLinuxCI = isCI && !isLinux ? describe.skip : describe;
 
-describeOrSkipInCI("Contract Tests", () => {
+describeOrSkipInNonLinuxCI("Contract Tests", () => {
     /**
      * @type {import("testcontainers").GenericContainer}
      */
@@ -29,6 +31,7 @@ describeOrSkipInCI("Contract Tests", () => {
                 stream.on("data", process.stdout.write);
                 stream.on("err", process.stderr.write);
             })
+            .withExtraHosts([{ host: "host.docker.internal", ipAddress: "host-gateway" }])
             .withWaitStrategy(Wait.forLogMessage("Tests run:"));
     }, 600_000);
 

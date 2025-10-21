@@ -5,7 +5,7 @@ function startAppServer(port) {
   return new Promise((resolve) => {
     app = require("../../../src/app.js");
     const server = http.createServer(app);
-    server.listen(port);
+    server.listen(port, "0.0.0.0");
     server.on("listening", async () => {
       console.log(`API Server started on port ${port}`);
       resolve(server);
