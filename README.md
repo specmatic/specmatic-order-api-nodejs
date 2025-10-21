@@ -5,7 +5,7 @@
 
 This sample project illustrates the implementation of contract-driven development and contract testing within a Nodejs(Express) application. In this context, Specmatic is utilized to function as a client, making calls to API service according to its OpenAPI specification to validate its functionality.
 
-Here is the API's [contract/open api spec](https://github.com/znsio/specmatic-order-contracts/blob/main/io/specmatic/examples/store/openapi/api_order_v3.yaml) governing the interaction of the client with the product API.
+Here is the API's [contract/open api spec](https://github.com/specmatic/specmatic-order-contracts/blob/main/io/specmatic/examples/store/openapi/api_order_v3.yaml) governing the interaction of the client with the product API.
 
 ## Tech
 
