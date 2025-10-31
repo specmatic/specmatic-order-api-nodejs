@@ -20,7 +20,7 @@
     "axios": "^1.7.7",
     "better-sqlite3": "^11.3.0",
     "debug": "^4.3.7",
-    "express": "^4.21.0",
+    "express": "^5.1.0",
     "express-openapi-validator": "^5.3.7",
     "globals": "^15.10.0"
   },
