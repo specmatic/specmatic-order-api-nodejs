@@ -1,7 +1,7 @@
 # Specmatic Sample: Nodejs-Express Order API
 
 - [Specmatic Website](https://specmatic.io)
-- [Specmatic Documentation](https://specmatic.io/documentation.html)
+- [Specmatic Documentation](https://docs.specmatic.io)
 
 This sample project illustrates the implementation of contract-driven development and contract testing within a Nodejs(Express) application. In this context, Specmatic is utilized to function as a client, making calls to API service according to its OpenAPI specification to validate its functionality.
 
@@ -12,11 +12,13 @@ Here is the API's [contract/open api spec](https://github.com/specmatic/specmati
 1. Express
 2. Specmatic
 3. Jest
+4. Docker Desktop
 
 ## Setup
 
 1. Install [NodeJS](https://nodejs.org/en)
 2. Install JRE 17 or later.
+3. Install Docker Desktop
 
 ## Install Dependencies
 
