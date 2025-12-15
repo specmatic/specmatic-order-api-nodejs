@@ -57,7 +57,7 @@ jobs:
             --repo-url ${{ github.event.repository.html_url }}
 
       - name: Upload HTML Test Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.os }}-${{ matrix.node-version }}-html-report
           path: build/reports/specmatic/html
