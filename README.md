@@ -16,7 +16,7 @@ Here is the API's [contract/open api spec](https://github.com/specmatic/specmati
 
 ## Setup
 
-1. Install [NodeJS](https://nodejs.org/en)
+1. Install [NodeJS](https://nodejs.org/en) node v24.11.1, npm 11.6.2
 2. Install JRE 17 or later.
 3. Install Docker Desktop
 
