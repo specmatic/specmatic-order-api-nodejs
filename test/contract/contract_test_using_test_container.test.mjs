@@ -21,14 +21,10 @@ describeOrSkipInNonLinuxCI("Contract Tests", () => {
   beforeAll(async () => {
     appServer = await startAppServer(APP_PORT);
     specmaticTestContainer = new GenericContainer("specmatic/specmatic")
-      .withCommand([
-        "test",
-        "--host",
-        "host.docker.internal",
-        "--port",
-        APP_PORT.toString(),
-      ])
-      .withEnvironment({ SPECMATIC_GENERATIVE_TESTS: "true" })
+      .withCommand(["test"])
+      .withEnvironment({
+        APP_URL: `http://host.docker.internal:${APP_PORT}`,
+      })
       .withBindMounts([
         {
           source: path.resolve("specmatic.yaml"),

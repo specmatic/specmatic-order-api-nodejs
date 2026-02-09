@@ -8,7 +8,7 @@
   "scripts": {
     "start": "set DEBUG=specmatic-order-api-nodejs:* && node ./src/bin/www",
     "dev": "nodemon set DEBUG=specmatic-order-api-nodejs:* node ./src/bin/www",
-    "test": "cross-env SPECMATIC_GENERATIVE_TESTS=true SPECMATIC_LOG_LEVEL=debug NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 node ./node_modules/jest/bin/jest.js --collectCoverage --detectOpenHandles",
+    "test": "cross-env SPECMATIC_LOG_LEVEL=debug NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 node ./node_modules/jest/bin/jest.js --collectCoverage --detectOpenHandles",
     "test-happy-path": "cross-env SPECMATIC_LOG_LEVEL=debug NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 node ./node_modules/jest/bin/jest.js --collectCoverage --detectOpenHandles",
     "prepare": "husky",
     "lint": "eslint .",

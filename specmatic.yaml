@@ -2,6 +2,10 @@ version: 3
 systemUnderTest:
   service:
     $ref: "#/components/services/orderApiService"
+    runOptions:
+      $ref: "#/components/runOptions/orderApiServiceTest"
+    settings:
+      schemaResiliencyTests: all
 components:
   sources:
     specmaticOrderContracts:
@@ -15,6 +19,12 @@ components:
               $ref: "#/components/sources/specmaticOrderContracts"
             specs:
               - io/specmatic/examples/store/openapi/api_order_v3.yaml
+  runOptions:
+    orderApiServiceTest:
+      openapi:
+        type: test
+        baseUrl: "{APP_URL:http://localhost:8081}"
+        filter: "PATH!='/internal/metrics'"
 specmatic:
   governance:
     successCriteria:
