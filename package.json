@@ -14,7 +14,10 @@
     "lint": "eslint .",
     "prettier": "prettier --write .",
     "pre-commit": "npm run lint && npm run prettier",
-    "pre-push": "npm run lint && npm run prettier && npm run test"
+    "pre-push": "npm run lint && npm run prettier && npm run test",
+    "generate-spec": "node scripts/generateOpenApiSpec.js",
+    "validate-spec": "npx specmatic validate ./specmatic/openapi.v1.yaml",
+    "contract-test": "npm run generate-spec && npx specmatic test --config specmatic.local.yaml"
   },
   "dependencies": {
     "axios": "^1.13.2",
@@ -33,11 +36,13 @@
     "eslint-plugin-prettier": "^5.5.4",
     "husky": "^9.1.7",
     "jest": "^30.2.0",
+    "js-yaml": "^4.1.1",
     "node-fetch": "^3.3.2",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
     "specmatic": "^2.39.2",
     "supertest": "^7.1.4",
+    "swagger-jsdoc": "^6.2.8",
     "testcontainers": "^11.8.0"
   }
 }
