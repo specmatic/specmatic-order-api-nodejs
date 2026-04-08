@@ -12,10 +12,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "static/uploads")));
 app.use(
   OpenApiValidator.middleware({
-    apiSpec: "./specs/api_order_v3.yaml",
+    apiSpec: "./specmatic/openapi.v1.yaml",
     validateRequests: true,
     validateResponses: false,
     ignorePaths: /.*\/favicon.*/,
+    validateSecurity: false,
   }),
 );
 
