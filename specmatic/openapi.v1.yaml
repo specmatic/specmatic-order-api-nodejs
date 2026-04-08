@@ -1,0 +1,443 @@
+openapi: 3.0.0
+info:
+  title: Order API
+  version: 1.0.0
+  description: API for managing products and orders
+servers:
+  - url: http://localhost:8080
+    description: Development server
+paths:
+  /products:
+    get:
+      summary: Search products by type
+      tags:
+        - Products
+      parameters:
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - gadget
+              - book
+              - food
+              - other
+          description: Filter products by type
+      responses:
+        '200':
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+    post:
+      summary: Create a new product
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - type
+                - inventory
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                    - gadget
+                    - book
+                    - food
+                    - other
+                inventory:
+                  type: integer
+      responses:
+        '200':
+          description: Product created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /products/{id}:
+    get:
+      summary: Get product by ID
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Product details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+    post:
+      summary: Update product details
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                    - gadget
+                    - book
+                    - food
+                    - other
+                inventory:
+                  type: integer
+      responses:
+        '200':
+          description: Update successful
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Successfully updated product with id 10
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+    delete:
+      summary: Delete a product
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Deletion successful
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 'Successfully deleted product id: 10'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /products/{id}/image:
+    put:
+      summary: Upload product image
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - image
+              properties:
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Image uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  productId:
+                    type: integer
+                  message:
+                    type: string
+        '400':
+          description: No file uploaded
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: No image file uploaded
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /orders:
+    get:
+      summary: Search orders
+      tags:
+        - Orders
+      parameters:
+        - name: productid
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - pending
+              - fulfilled
+              - cancelled
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+    post:
+      summary: Create a new order
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - productid
+                - count
+              properties:
+                productid:
+                  type: integer
+                count:
+                  type: integer
+      responses:
+        '200':
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+  /orders/{id}:
+    get:
+      summary: Get order by ID
+      tags:
+        - Orders
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+    post:
+      summary: Update order details
+      tags:
+        - Orders
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productid:
+                  type: integer
+                count:
+                  type: integer
+                status:
+                  type: string
+                  enum:
+                    - pending
+                    - fulfilled
+                    - cancelled
+      responses:
+        '200':
+          description: Update successful
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Successfully updated order with id 10
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+    delete:
+      summary: Cancel/delete an order
+      tags:
+        - Orders
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Deletion successful
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Successfully deleted order with id 10
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseBody'
+components:
+  schemas:
+    ErrorResponseBody:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - gadget
+            - book
+            - food
+            - other
+        inventory:
+          type: integer
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+        productid:
+          type: integer
+        count:
+          type: integer
+        status:
+          type: string
+          enum:
+            - pending
+            - fulfilled
+            - cancelled
+tags: []

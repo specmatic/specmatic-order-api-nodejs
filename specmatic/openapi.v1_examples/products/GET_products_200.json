@@ -1,0 +1,23 @@
+{
+  "http-request": {
+    "method": "GET",
+    "path": "/products"
+  },
+  "http-response": {
+    "status": 200,
+    "body": [
+      {
+        "id": 10,
+        "name": "XYZ Phone",
+        "type": "gadget",
+        "inventory": 10
+      },
+      {
+        "id": 11,
+        "name": "JavaScript Guide",
+        "type": "book",
+        "inventory": 5
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "http-request": {
+    "method": "GET",
+    "path": "/orders/10"
+  },
+  "http-response": {
+    "status": 200,
+    "body": {
+      "id": 10,
+      "productid": 10,
+      "count": 2,
+      "status": "pending"
+    }
+  }
+}

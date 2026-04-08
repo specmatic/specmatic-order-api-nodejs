@@ -1,0 +1,18 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/orders/10",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "productid": 10,
+      "count": 5,
+      "status": "fulfilled"
+    }
+  },
+  "http-response": {
+    "status": 200,
+    "body": "Successfully updated order with id 10"
+  }
+}

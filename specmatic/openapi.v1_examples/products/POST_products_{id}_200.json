@@ -1,0 +1,18 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/products/10",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "Updated XYZ Phone",
+      "type": "gadget",
+      "inventory": 15
+    }
+  },
+  "http-response": {
+    "status": 200,
+    "body": "Successfully updated product with id 10"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "http-request": {
+    "method": "DELETE",
+    "path": "/orders/20"
+  },
+  "http-response": {
+    "status": 200,
+    "body": "Successfully deleted order with id 20"
+  }
+}
