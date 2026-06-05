@@ -23,7 +23,7 @@ app.use("/products", productsController);
 app.use("/orders", ordersController);
 
 app.use((err, req, res, next) => {
-  if (err.status !== 400) {
+  if (err.status !== 400 && err.status !== 415) {
     console.error("ERROR", err);
     return next(err);
   }
